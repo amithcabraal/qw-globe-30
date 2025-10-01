@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GeoJSON Test</title>
+</head>
+<body>
+    <h1>GeoJSON Test</h1>
+    <button onclick="testFetch()">Test Fetch</button>
+    <div id="result"></div>
+
+    <script>
+        async function testFetch() {
+            const result = document.getElementById('result');
+            result.innerHTML = 'Loading...';
+
+            try {
+                const url = 'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_50m_admin_0_countries.geojson';
+                const response = await fetch(url);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                result.innerHTML = `
+                    <h2>Success!</h2>
+                    <p>Features loaded: ${data.features.length}</p>
+                    <p>First country: ${data.features[0].properties.name} (${data.features[0].properties.iso_a3})</p>
+                    <p>USA found: ${data.features.find(f => f.properties.iso_a3 === 'USA') ? 'Yes' : 'No'}</p>
+                `;
+            } catch (error) {
+                result.innerHTML = `<h2>Error!</h2><p>${error.message}</p>`;
+                console.error('Error:', error);
+            }
+        }
+    </script>
+</body>
+</html>
