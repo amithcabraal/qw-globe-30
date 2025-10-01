@@ -30,7 +30,7 @@ export function WelcomeModal() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <Globe className="w-10 h-10" />
-              <h2 className="text-2xl font-bold">Welcome to Country Quiz!</h2>
+              <h2 className="text-2xl font-bold">Welcome to QW. Country Quiz!</h2>
             </div>
             <button
               onClick={handleDismiss}
